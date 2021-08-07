@@ -1,0 +1,36 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "测试常用babel配置",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babelBuild": "babel src --out-dir dist",
+    "webpackBuild": "cross-env WEB_ENV=production webpack --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "cross-env": "^7.0.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/runtime-corejs3": "^7.14.9",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "core-js": "^3.16.0",
+    "css-loader": "^3.5.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^4.5.1",
+    "less-loader": "^10.0.1",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "postcss-loader": "^6.1.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpackbar": "^5.0.0-3"
+  }
+}

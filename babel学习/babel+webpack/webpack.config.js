@@ -7,7 +7,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 将css单独打包成css，不使用extract-text-webpack-plugin的话webpack将会把css和js打包到一起
 // const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'); // 压缩css
 const WebpackBar = require('webpackbar'); // webpack进度条
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const {
+	CleanWebpackPlugin
+} = require('clean-webpack-plugin');
+// 提供带 Content-Encoding 编码的压缩版的资源-即常看到的gizp压缩
+const CompressionPlugin = require("compression-webpack-plugin")
 const env = process.env.WEB_ENV || 'dev';
 console.log('项目根目录:' + __dirname)
 module.exports = {
@@ -58,6 +62,13 @@ module.exports = {
 			filename: 'css/[name].css',
 			allChunks: true, // 当为false的时候，之后提取初始化的时候引入的css，当chunks为true时，会把异步引入的css也提取出来。
 		}),
+		new CompressionPlugin({
+			test: /\\.(js|css)$/,
+			filename: '[path].gz[query]', // 注意:asset属性被删除了,改为filename
+			algorithm: 'gzip',
+			threshold: 0, // 只处理比这个值大的资源。按字节计算
+			minRatio: 0.8 ,// 只有压缩率比这个值小的资源才会被处理
+		})
 	],
 	// optimization: { // 从webpack4开始官方移除了commonchunk插件，改用了optimization属性进行更加灵活的配置，这也应该是从V3升级到V4的代码修改过程中最为复杂的一部分
 	//   minimize: env === 'dev' ? false : true, // true默认情况下的production模式。
@@ -66,3 +77,10 @@ module.exports = {
 	//   ]
 	// },
 }
+
+// node端服务器启用gzip
+// nodejs很幸福，只需use一个compress模块
+// var compression = require('compression')
+// var app = express();
+// //尽量在其他中间件前使用compression
+// app.use(compression());

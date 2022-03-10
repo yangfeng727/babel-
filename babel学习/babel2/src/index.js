@@ -1,23 +1,33 @@
+// import "core-js"
+// import "regenerator-runtime/runtime"
 
-let myArr = [1,2,3]
-let item = myArr.find(item=>item === 2)
-console.log('find方法',item)
-
-
-function test() {
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            resolve({data:'返回值111'})
-        },100)
-    })
+console.log('-- es5+语法转换，如箭头函数，let，const, class等 --')
+let myArr = [1, 2, 3]
+const fn = ()=>{
+    console.log('箭头函数',myArr)
 }
-
-var myTest = async function () {
-    let {data} = await test()
-    console.log('promise返回值',data)
-    const arr = [1,2,3,4].map(item => item * item)
-    const hasNumber = (num) => [4, 5, 6, 7, 8].includes(num)
-    console.log(arr)
-    console.log( hasNumber(2))
+fn()
+class Animal{
+    constructor(name){
+        this.name = name
+    }
+    sayName(){
+        console.log('我的名字是:'+ this.name)
+    }
 }
-myTest()
+var cat = new Animal('小猫')
+cat.sayName()
+
+
+console.log('-------新增的api,如 Promise，Array.from-------')
+new Promise((resolve,reject)=>{
+        resolve({data:'Promise 返回值'})
+}).then(res=>{
+    console.log(res.data)
+})
+console.log(Array.from('foo'));
+
+
+console.log('-------实例属性，如[].includes, string.repeat-------')
+console.log([1,2,3].includes(3))
+console.log("abc".repeat(3))
